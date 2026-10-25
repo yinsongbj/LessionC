@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C语言极简开发入门 · 教案</title>
+<meta name="description" content="面向开发入门者的 C 语言极简开发入门教案：19 页正文 + 3 个附录，代码全部经 gcc 实测可编译运行。">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%2358A6FF'>C</text></svg>">
+</head>
+<body>
+
+<!-- 顶栏 -->
+<header class="topbar">
+  <div class="brand">
+    <span>C语言极简开发入门</span>
+    <span class="brand-sub">教案 · 19 页正文 + 3 附录</span>
+  </div>
+
+  <div class="topbar-spacer"></div>
+
+  <div class="nav-group">
+    <button class="btn" id="btnPrev" type="button" title="上一页 (←)">
+      <span class="ico">‹</span>上一页
+    </button>
+    <button class="btn btn-primary" id="btnNext" type="button" title="下一页 (→)">
+      下一页<span class="ico">›</span>
+    </button>
+  </div>
+
+  <div class="nav-group">
+    <button class="btn" id="btnOutline" type="button" title="目录总览 (O)">
+      <span class="ico">☰</span>目录
+    </button>
+    <button class="btn" id="btnNotes" type="button" title="讲稿模式 (N / ↓)">
+      <span class="ico">📝</span>讲稿
+    </button>
+    <button class="btn" id="btnTheme" type="button" title="切换主题 (T)">
+      <span class="ico">☀</span>浅色
+    </button>
+    <button class="btn" id="btnHelp" type="button" title="快捷键 (?)">?</button>
+  </div>
+</header>
+
+<!-- 进度条 -->
+<div class="progress-wrap" id="progressWrap" title="点击跳页">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<!-- 舞台 -->
+<main class="stage" id="stage"></main>
+
+<!-- 状态栏 -->
+<footer class="statusbar">
+  <span class="counter" id="counter">01 / 22</span>
+  <span id="statusTitle"></span>
+  <span class="spacer"></span>
+  <span class="hint"><kbd>←</kbd><kbd>→</kbd> 翻页 · <kbd>N</kbd> 讲稿 · <kbd>O</kbd> 目录 · <kbd>T</kbd> 主题 · <kbd>F</kbd> 全屏</span>
+</footer>
+
+<!-- 目录总览 -->
+<div class="overlay" id="overlay">
+  <div class="overlay-head">
+    <h2>目录总览</h2>
+    <span style="font-size:12px;color:rgba(230,237,243,.5)">点击任意卡片跳转</span>
+    <span class="spacer"></span>
+    <button class="btn" id="overlayClose" type="button">关闭 (Esc)</button>
+  </div>
+  <div class="thumbs" id="thumbs"></div>
+</div>
+
+<!-- 帮助面板 -->
+<div class="help-panel" id="helpPanel">
+  <h3>快捷键</h3>
+  <div class="help-row"><span>下一页</span><span><kbd>→</kbd> <kbd>空格</kbd> <kbd>PgDn</kbd></span></div>
+  <div class="help-row"><span>上一页</span><span><kbd>←</kbd> <kbd>PgUp</kbd></span></div>
+  <div class="help-row"><span>首页 / 末页</span><span><kbd>Home</kbd> <kbd>End</kbd></span></div>
+  <div class="help-row"><span>讲稿模式</span><span><kbd>N</kbd> <kbd>↓</kbd></span></div>
+  <div class="help-row"><span>目录总览</span><span><kbd>O</kbd></span></div>
+  <div class="help-row"><span>深/浅主题</span><span><kbd>T</kbd></span></div>
+  <div class="help-row"><span>全屏</span><span><kbd>F</kbd></span></div>
+  <div class="help-row"><span>关闭浮层</span><span><kbd>Esc</kbd></span></div>
+</div>
+
+<!-- 讲稿面板 -->
+<div class="notes" id="notes">
+  <div class="notes-head">
+    <span class="n-label">讲稿</span>
+    <span class="n-title" id="notesTitle"></span>
+  </div>
+  <div class="notes-body" id="notesBody"></div>
+</div>
+
+<script src="assets/js/content.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
