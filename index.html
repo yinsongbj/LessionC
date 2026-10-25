@@ -2,96 +2,99 @@
 <html lang="zh-CN" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>C语言极简开发入门 · 教案</title>
-<meta name="description" content="面向开发入门者的 C 语言极简开发入门教案：19 页正文 + 3 个附录，代码全部经 gcc 实测可编译运行。">
-<link rel="stylesheet" href="assets/css/theme.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%2358A6FF'>C</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="C语言开发视角全面教程 —— 按章节组织的交互式教程网站，实用优先、多代码、多坑点、多调试。">
+<title>C语言开发视角全面教程</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- 顶栏 -->
-<header class="topbar">
-  <div class="brand">
-    <span>C语言极简开发入门</span>
-    <span class="brand-sub">教案 · 19 页正文 + 3 附录</span>
-  </div>
+<!-- ============ 移动端抽屉遮罩 ============ -->
+<div class="scrim" id="scrim" hidden></div>
 
-  <div class="topbar-spacer"></div>
+<div class="layout">
 
-  <div class="nav-group">
-    <button class="btn" id="btnPrev" type="button" title="上一页 (←)">
-      <span class="ico">‹</span>上一页
-    </button>
-    <button class="btn btn-primary" id="btnNext" type="button" title="下一页 (→)">
-      下一页<span class="ico">›</span>
-    </button>
-  </div>
+  <!-- ============ 左侧固定侧边栏 ============ -->
+  <aside class="sidebar" id="sidebar" aria-label="课程目录">
+    <header class="side-head">
+      <div class="brand">
+        <div class="brand-mark">C</div>
+      <div class="brand-text">
+        <h1>C语言开发视角</h1>
+        <p>全面教程 · 阅读模式</p>
+      </div>
+    </div>
+    <button class="icon-btn side-close" id="btnClose" title="关闭目录" aria-label="关闭目录">&times;</button>
+  </header>
 
-  <div class="nav-group">
-    <button class="btn" id="btnOutline" type="button" title="目录总览 (O)">
-      <span class="ico">☰</span>目录
-    </button>
-    <button class="btn" id="btnNotes" type="button" title="讲稿模式 (N / ↓)">
-      <span class="ico">📝</span>讲稿
-    </button>
-    <button class="btn" id="btnTheme" type="button" title="切换主题 (T)">
-      <span class="ico">☀</span>浅色
-    </button>
-    <button class="btn" id="btnHelp" type="button" title="快捷键 (?)">?</button>
-  </div>
-</header>
+  <a class="mode-switch" href="slides.html" title="切换到讲义模式 (一页一屏, 适合投屏授课)">
+    <span class="ms-ico">📖</span>
+    <span class="ms-text">阅读模式 · 切换到<strong>讲义模式</strong></span>
+  </a>
 
-<!-- 进度条 -->
-<div class="progress-wrap" id="progressWrap" title="点击跳页">
-  <div class="progress-bar" id="progressBar"></div>
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6"/><line x1="13.5" y1="13.5" x2="18" y2="18"/></svg>
+      <input type="search" id="search" placeholder="搜索章节 / 关键词" autocomplete="off" aria-label="搜索章节">
+      <kbd class="search-kbd">/</kbd>
+    </div>
+
+    <div class="side-progress">
+      <div class="sp-row">
+        <span class="sp-label">阅读进度</span>
+        <span class="sp-count" id="spCount">0 / 14</span>
+      </div>
+      <div class="sp-bar"><div class="sp-fill" id="spFill"></div></div>
+    </div>
+
+    <nav class="chapter-nav" id="chapterNav" aria-label="章节列表"></nav>
+
+    <footer class="side-foot">
+      <button class="theme-btn" id="btnTheme" title="切换暗色 / 亮色">
+        <span class="theme-ico" id="themeIco">☾</span>
+        <span id="themeTxt">深色模式</span>
+      </button>
+      <span class="side-ver">v1.0 · 零依赖</span>
+    </footer>
+  </aside>
+
+  <!-- ============ 右侧主内容区 ============ -->
+  <main class="main" id="main">
+    <div class="topbar">
+      <button class="icon-btn menu-btn" id="btnMenu" title="目录" aria-label="打开目录">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-meta">
+        <span class="crumb" id="crumb"></span>
+        <span class="topbar-title" id="topTitle"></span>
+      </div>
+      <div class="topbar-time" id="topTime"></div>
+      <div class="topbar-nav">
+        <button class="nav-btn" id="btnPrev" title="上一章 (←)">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><polyline points="12,4 6,10 12,16"/></svg>
+          <span>上一章</span>
+        </button>
+        <button class="nav-btn" id="btnNext" title="下一章 (→)">
+          <span>下一章</span>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><polyline points="8,4 14,10 8,16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 阅读进度条（随滚动变化） -->
+    <div class="scroll-progress"><div class="scroll-fill" id="scrollFill"></div></div>
+
+    <article class="content" id="content" tabindex="-1"></article>
+
+    <footer class="page-nav" id="pageNav"></footer>
+  </main>
 </div>
 
-<!-- 舞台 -->
-<main class="stage" id="stage"></main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- 状态栏 -->
-<footer class="statusbar">
-  <span class="counter" id="counter">01 / 22</span>
-  <span id="statusTitle"></span>
-  <span class="spacer"></span>
-  <span class="hint"><kbd>←</kbd><kbd>→</kbd> 翻页 · <kbd>N</kbd> 讲稿 · <kbd>O</kbd> 目录 · <kbd>T</kbd> 主题 · <kbd>F</kbd> 全屏</span>
-</footer>
-
-<!-- 目录总览 -->
-<div class="overlay" id="overlay">
-  <div class="overlay-head">
-    <h2>目录总览</h2>
-    <span style="font-size:12px;color:rgba(230,237,243,.5)">点击任意卡片跳转</span>
-    <span class="spacer"></span>
-    <button class="btn" id="overlayClose" type="button">关闭 (Esc)</button>
-  </div>
-  <div class="thumbs" id="thumbs"></div>
-</div>
-
-<!-- 帮助面板 -->
-<div class="help-panel" id="helpPanel">
-  <h3>快捷键</h3>
-  <div class="help-row"><span>下一页</span><span><kbd>→</kbd> <kbd>空格</kbd> <kbd>PgDn</kbd></span></div>
-  <div class="help-row"><span>上一页</span><span><kbd>←</kbd> <kbd>PgUp</kbd></span></div>
-  <div class="help-row"><span>首页 / 末页</span><span><kbd>Home</kbd> <kbd>End</kbd></span></div>
-  <div class="help-row"><span>讲稿模式</span><span><kbd>N</kbd> <kbd>↓</kbd></span></div>
-  <div class="help-row"><span>目录总览</span><span><kbd>O</kbd></span></div>
-  <div class="help-row"><span>深/浅主题</span><span><kbd>T</kbd></span></div>
-  <div class="help-row"><span>全屏</span><span><kbd>F</kbd></span></div>
-  <div class="help-row"><span>关闭浮层</span><span><kbd>Esc</kbd></span></div>
-</div>
-
-<!-- 讲稿面板 -->
-<div class="notes" id="notes">
-  <div class="notes-head">
-    <span class="n-label">讲稿</span>
-    <span class="n-title" id="notesTitle"></span>
-  </div>
-  <div class="notes-body" id="notesBody"></div>
-</div>
-
-<script src="assets/js/content.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/exercises.js"></script>
+<script src="js/outputs.js"></script>
+<script src="js/core.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

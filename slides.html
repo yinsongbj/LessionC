@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="C语言开发视角全面教程 · 讲义模式 —— 一页一屏的授课用课件，含逐页讲稿、缩略图总览、方向键翻页。">
+<title>C语言开发视角全面教程 · 讲义模式</title>
+<link rel="stylesheet" href="css/slides.css">
+</head>
+<body>
+
+<div id="stageWrap">
+  <!-- 进度条: 点击可跳到任意页 -->
+  <div id="progressWrap"><div id="progressBar"></div></div>
+
+  <!-- 舞台: 固定 1600x900, 等比缩放 -->
+  <div id="stage">
+    <div id="topbar">
+      <div id="brand">
+        <span id="brandMark">C</span>
+        <span>C语言开发视角全面教程</span>
+      </div>
+
+      <div id="statusTitle"></div>
+
+      <div id="toolbar">
+        <button class="sl-tool" id="btnPrev" title="上一页 (←)">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="12,4 6,10 12,16"/></svg>
+          <span>上一页</span>
+        </button>
+        <button class="sl-tool" id="btnNext" title="下一页 (→)">
+          <span>下一页</span>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8,4 14,10 8,16"/></svg>
+        </button>
+        <span id="counter">01 / 01</span>
+        <button class="sl-tool" id="btnOutline" title="总览 (O)">☰ 总览</button>
+        <button class="sl-tool" id="btnNotes" title="讲稿 (N)">📝 讲稿</button>
+        <button class="sl-tool" id="btnTheme" title="深色 / 浅色 (T)"><span class="ico">☾</span>深色</button>
+        <button class="sl-tool" id="btnHelp" title="快捷键 (?)">?</button>
+        <a class="sl-tool" href="index.html" title="切换到阅读模式">📖 阅读</a>
+      </div>
+    </div>
+
+    <!-- 幻灯片内容由 slides.js 渲染到 #slideBody 内部 -->
+    <div id="slideBody"></div>
+  </div>
+</div>
+
+<!-- ============ 讲稿面板 ============ -->
+<aside id="notes" aria-label="讲稿">
+  <div id="notesHead">
+    <span>📝</span>
+    <span id="notesTitle"></span>
+    <button id="notesClose" aria-label="关闭讲稿">&times;</button>
+  </div>
+  <div id="notesBody"></div>
+</aside>
+
+<!-- ============ 总览浮层 ============ -->
+<div id="overlay">
+  <div id="overlayHead">
+    <h3>全部幻灯片</h3>
+    <button id="overlayClose">关闭 (Esc)</button>
+  </div>
+  <div id="thumbs"></div>
+</div>
+
+<!-- ============ 快捷键面板 ============ -->
+<div id="helpPanel">
+  <h3>快捷键</h3>
+  <table>
+    <tr><td><kbd>→</kbd> / <kbd>空格</kbd> / <kbd>PgDn</kbd></td><td>下一页</td></tr>
+    <tr><td><kbd>←</kbd> / <kbd>PgUp</kbd></td><td>上一页</td></tr>
+    <tr><td><kbd>Home</kbd> / <kbd>End</kbd></td><td>首页 / 末页</td></tr>
+    <tr><td><kbd>N</kbd></td><td>讲稿面板</td></tr>
+    <tr><td><kbd>O</kbd></td><td>缩略图总览</td></tr>
+    <tr><td><kbd>T</kbd></td><td>深色 / 浅色</td></tr>
+    <tr><td><kbd>F</kbd></td><td>全屏</td></tr>
+    <tr><td><kbd>?</kbd></td><td>本面板</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>关闭浮层</td></tr>
+  </table>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/chapters.js"></script>
+<script src="js/exercises.js"></script>
+<script src="js/outputs.js"></script>
+<script src="js/notes.js"></script>
+<script src="js/core.js"></script>
+<script src="js/slides.js"></script>
+</body>
+</html>
